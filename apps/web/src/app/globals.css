@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* Caudal tokens — mirror of packages/shared/src/theme.ts */
+:root {
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --surface-alt: #e9edf4;
+  --line: #dce1ea;
+  --ink: #1c2541;
+  --muted: #5d6b82;
+  --faint: #8e99ad;
+  --mango: #f2a541;
+  --mango-ink: #3a2606;
+  --income: #23794c;
+  --expense: #b83a31;
+  --warning: #b76e00;
+  --focus: #3554e0;
+  --shadow: 0 1px 2px rgb(28 37 65 / 0.06), 0 8px 24px -12px rgb(28 37 65 / 0.18);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1528;
+    --surface: #171f38;
+    --surface-alt: #1f2947;
+    --line: #2a355a;
+    --ink: #e8ecf5;
+    --muted: #9ba7c2;
+    --faint: #6d7a98;
+    --mango: #f5b45a;
+    --mango-ink: #2b1c04;
+    --income: #5cc28a;
+    --expense: #f07a70;
+    --warning: #f0b04a;
+    --focus: #8fa5ff;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1528;
+  --surface: #171f38;
+  --surface-alt: #1f2947;
+  --line: #2a355a;
+  --ink: #e8ecf5;
+  --muted: #9ba7c2;
+  --faint: #6d7a98;
+  --mango: #f5b45a;
+  --mango-ink: #2b1c04;
+  --income: #5cc28a;
+  --expense: #f07a70;
+  --warning: #f0b04a;
+  --focus: #8fa5ff;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-mango: var(--mango);
+  --color-mango-ink: var(--mango-ink);
+  --color-income: var(--income);
+  --color-expense: var(--expense);
+  --color-warning: var(--warning);
+  --color-focus: var(--focus);
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-plex), ui-sans-serif, sans-serif;
+  --shadow-card: var(--shadow);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "tnum" 0;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--mango) 45%, transparent);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: var(--date-icon-filter, none);
+}
+:root[data-theme="dark"] {
+  --date-icon-filter: invert(0.8);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --date-icon-filter: invert(0.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes sheet-in {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-sheet { animation: sheet-in 180ms ease-out; }
+.animate-fade { animation: fade-in 150ms ease-out; }
+
+/* The one flourish: the river line on the hero/balance band. */
+@keyframes flow {
+  to { stroke-dashoffset: -400; }
+}
+.flow-line {
+  stroke-dasharray: 6 10;
+  animation: flow 14s linear infinite;
+}
